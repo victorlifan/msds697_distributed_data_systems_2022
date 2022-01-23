@@ -3,4 +3,6 @@
 
 **Day 1 Example**
 
-postgres json example and its limitation and need of a NoSQL database in some cases.
+postgres json example and its limitation 
+
+The need of a NoSQL database in some cases
