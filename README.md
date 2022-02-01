@@ -15,3 +15,11 @@ The need of a NoSQL database in some cases
 MongoDB data types
 
 Basic MongoDB CRUD Operatons (will be continued in Day3)
+
+
+--------
+
+**Day 3 Example**
+Design and implement more complex queries  - focusing on query and projection operators.
+
+ 
