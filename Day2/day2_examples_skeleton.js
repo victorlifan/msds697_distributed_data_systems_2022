@@ -102,8 +102,8 @@ db.friends.findOne()
 // if it is either not set or the existing value larger than 1.
 //$min : updates the value of the field to a specified value 
 //       if the specified value is less than the current value of the field. 
-
-
+db.friends.updateMany({'name':"Diane MK Woodbridge"},{$set:{'numCats':1},{uose})
+db.friends.findOne()
 // For documents where "name" is "Diane MK Woodbridge", 
 // set "numDogs" to 1, 
 // if it is either not set or the existing value is smaller than 1.
