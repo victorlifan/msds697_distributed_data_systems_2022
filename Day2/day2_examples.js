@@ -128,6 +128,14 @@ db.friends.find({"name" : "Diane MK Woodbridge"})
 // Example 8
 // In the "business" collection, for "White Castle" on "Pennsylvania Avenue" , 
 // insert a new grades with "date" : today, "grade" : "A", and "score" : 9.
+
+//db.business.find({'name':'White Castle','address.street':'Pennsylvania Avenue'})
+//db.business.updateMany({'name':'White Castle','address.street':'Pennsylvania Avenue'},{$push:{"date" : new Date(), "grade" : "A", "score" : 9}})
+//db.business.find({'name':'White Castle','address.street':'Pennsylvania Avenue'})
+
+
+
+
 db.business.find({"name":"White Castle", "address.street":"Pennsylvania Avenue"})
 db.business.updateMany({"name":"White Castle" ,"address.street":"Pennsylvania Avenue"}, 
                    {$push : {"grades": {
@@ -182,6 +190,15 @@ db.business.find({"restaurant_id": "40356483"})  // Change 3
 // Delete all items which officeAddress' city is “San Francisco”
 // What is the best way to drop all? 
 //// .deleteMany({}) vs .drop()
+db.friends.find()
+
+db.friends.deleteOne({'officeAddress.city':'San Franciso'})
+db.friends.count()
+db.friends.deleteMany({'officeAddress.city':'San Franciso'})
+db.friends.count()
+db.friends.drop()
+db.friends.count()
+
 
 //Remove One
 db.friends.deleteOne({"officeAddress.city":"San Francisco"})

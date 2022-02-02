@@ -5,7 +5,8 @@ use msds697
 
 // Example 1
 // Load world_bank_project.json to ”msds697” database’s “world_bank_project” collection and print only “borrower” information.
-
+db.world_bank_project.find({},{'borrower':1,'_id':0}).pretty()
+db.world_bank_project.find().sort({'approvalfy':1}).limit(1)
 // Count the number of documents
 db.world_bank_project.find().count() // 500
 
@@ -24,12 +25,18 @@ db.world_bank_project.find().sort({"approvalfy":1}).limit(1)
 
 // Example 2
 // 1) From “world_bank_project” collection, find the number of documents where their sector1’s Percent is greater than or equal to  60.
+db.world_bank_project.find({'sector1.Percent':{$gte:60}},{'_id':0,'borrower':1}).count()
+
 db.world_bank_project.find({"sector1.Percent":{$gte:60}}).count()
 // 2) From 1), print only “borrower” information.
 db.world_bank_project.find({"sector1.Percent":{$gte:60}},{"borrower":true, "_id":false}).pretty()
 
 // Example 3
 // Find URLs of document where them1’s Name is “Water resource management” or themecode is 65.
+
+db.world_bank_project.find({$or:[{'theme1.Name':'Water resource management'},
+    {'theme_namecode':65},{'url':1,"_id":0}]})
+
 db.world_bank_project.find({$or:[{"theme1.Name":"Water resource management"}, 
     					   {"themecode" : "65"}]},
     					   {"url":1, "_id":0})
