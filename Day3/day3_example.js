@@ -51,6 +51,11 @@ db.world_bank_project.find({"impagency":{$in:["MINISTRY OF EDUCATION","MINISTRY 
 // From the world_bank_project collection, find all the "project_name"s 
 // that include "project" sorted by "project_name".
 //// case-insensitive and multiline allowed
+
+db.world_bank_project.find({'project_name':{$regex:'\w*project\w*',$options:'i'}},{'project_name':1,'_id':0}).sort({'project_name':1})
+
+
+
 db.world_bank_project.find({"project_name":{$regex:"\w*project\w*", $options:'im'}},
 						   {"project_name":1,"_id":0})
 					 .sort({"project_name":1})			
@@ -59,6 +64,12 @@ db.world_bank_project.find({"project_name":{$regex:"\w*project\w*", $options:'im
 // Example 6
 // In world_bank_project, find documents where majorsector_percent is 
 // {"Name" : "Health and other social services", "Percent" : NumberInt(100)}
+
+ex6 = {"Name" : "Health and other social services", "Percent" : NumberInt(100)}
+
+db.world_bank_project.find({'majorsector_percent':ex6})
+
+
 majorsector_percent_input = {
                                 "Name" : "Health and other social services", 
                                 "Percent" : NumberInt(100)
@@ -69,6 +80,12 @@ db.world_bank_project.find({"majorsector_percent":majorsector_percent_input})
 // Example 7
 // Return the project_name and its last theme_namecode
 // for all project_name s ending with “projects” (case-insensitive). 
+
+
+db.world_bank_project.find({'project_name':{$regex:'project$',$options: 'im'}},
+                            {'theme_namecode':{$slice:-1}})
+
+
 db.world_bank_project.find({"project_name":{$regex:"project$", $options:'i'}}).pretty()
 
 db.world_bank_project.find({"project_name":{$regex:"project$", $options:'i'}},
@@ -78,6 +95,14 @@ db.world_bank_project.find({"project_name":{$regex:"project$", $options:'i'}},
 // Example 8
 // Return majorsector_percent and project_name, where majorsector_percent’s 
 // Percent is greater than or equal to 70.
+
+
+
+db.world_bank_project.find({'majorsector_percent.Percent':{$gte:70}},{'majorsector_percent.$':1,'project_name':1,'_id':0})
+
+
+
+
 db.world_bank_project.find({"majorsector_percent.Percent":{$gte:70}},
                            {"majorsector_percent":true, "project_name":true, "_id":false})
 db.world_bank_project.find({"majorsector_percent.Percent":{$gte:70}}, 
@@ -87,6 +112,15 @@ db.world_bank_project.find({"majorsector_percent.Percent":{$gte:70}},
 // Example 9
 // Return projectdocs, project_name for documents 
 // which majorsector_percent's Percent is greater than or eqaul to 70.
+
+
+db.world_bank_project.find({'majorsector_percent.Percent':{$gte:70}},
+                            {'projectdocs'})
+
+
+
+
+
 db.world_bank_project.find({$and:[{"majorsector_percent.Percent":{$gte:70}}]})
 db.world_bank_project.find({"majorsector_percent.Percent":{$gte:70}},
                            {"projectdocs.$":true, "project_name":true, "_id":false}) //Error
@@ -100,4 +134,14 @@ db.world_bank_project.find({"majorsector_percent.Percent":{$gte:70}},
 db.world_bank_project.find({"majorsector_percent.Percent":{$gte:70}},
                            {"projectdocs":{$elemMatch:{"DocType" : "PID", "DocDate":{$regex:"2013$"}}}, 
                             "project_name":true, "_id":false})
+                            
+                            
+                            
+db.business.find({'grades.grade':"A"},{'grades.$':1}) //return 1st element that match the query 
+db.business.find({'grades.grade':"A",'grades.score':{$gt:10}},{'grades.$':1}) // A or >10
+
+
+db.business.find({},{'grades':{$elemMatch:{'score':{$gt:10},'grade':"A"}}})
+db.business.find({'grades.grade':"A"},{'grades':{$elemMatch:{'score':{$gt:10},'grade':"A"}}})
+
 
