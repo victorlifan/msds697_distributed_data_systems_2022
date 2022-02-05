@@ -138,8 +138,14 @@ db.business.find({'grades.grade':"A",'grades.score':{$gt:10}},{'grades.$':1}) //
 // then it only return the 1st element which may or may not be grade=1 and socre>10
 db.business.find({$and:[{'grades.grade':"A"},{'grades.score':{$gt:10}}]},{'grades.$':1})
 
-db.business.find({},{'grades':{$elemMatch:{'score':{$gt:10},'grade':"A"}}})
+//return empty if any of elematch condistions dones't meet, 
+//thus it still return the entire # of documents but with lots of empties.
+db.business.find({},{'grades':{$elemMatch:{'score':{$gt:10},'grade':"A"}}}).count()
+db.business.find({}).count()
+
+
 //return empty if score <=10, b/c all the returned arries has grade A due the first query
 db.business.find({'grades.grade':"A"},{'grades':{$elemMatch:{'score':{$gt:10},'grade':"A"}}})
+db.business.find({'grades.grade':"A"},{'grades':{$elemMatch:{'grade':"A"}}})
 
-db.business.find({'grades.grade':"A"})
+db.business.find({'grades.grade':"A"},{'grades':{$elemMatch:{'score':{$gt:10}}}})
