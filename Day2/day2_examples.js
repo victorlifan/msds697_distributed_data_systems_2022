@@ -163,7 +163,9 @@ db.business.find({"restaurant_id" : "40364467"}) // Zero Cs
 // Example 9 
 //Change all scores of "40356483" from 10 to 11.
 //$
-db.business.find({"restaurant_id": "40356483"}) // has total 6 grades and 3 grades with 10 as a numeric score.
+// returns documents with id 40356843 as long as there is one score in grades is 10 
+//(grades is an array has multi scores)
+db.business.find({"restaurant_id": "40356483",'grades.score':10}) // has total 6 grades and 3 grades with 10 as a numeric score.
 db.business.updateMany({"restaurant_id": "40356483", "grades.score" : 10}, 
                        {$set:{"grades.$.score": 11}}) 
 db.business.find({"restaurant_id": "40356483"}) //One element is changed

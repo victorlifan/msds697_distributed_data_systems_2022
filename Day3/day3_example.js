@@ -104,21 +104,16 @@ db.world_bank_project.find({'majorsector_percent.Percent':{$gte:70}},{'majorsect
 
 
 db.world_bank_project.find({"majorsector_percent.Percent":{$gte:70}},
-                           {"majorsector_percent":true, "project_name":true, "_id":false})
+                           {"majorsector_percent":1, "project_name":1, "_id":0})
+                           
+                           
 db.world_bank_project.find({"majorsector_percent.Percent":{$gte:70}}, 
-                           {"majorsector_percent.$":true, "project_name":true, "_id":false})
+                           {"majorsector_percent.$":1, "project_name":1, "_id":0})
                            
                            
 // Example 9
 // Return projectdocs, project_name for documents 
 // which majorsector_percent's Percent is greater than or eqaul to 70.
-
-
-db.world_bank_project.find({'majorsector_percent.Percent':{$gte:70}},
-                            {'projectdocs'})
-
-
-
 
 
 db.world_bank_project.find({$and:[{"majorsector_percent.Percent":{$gte:70}}]})
@@ -139,9 +134,12 @@ db.world_bank_project.find({"majorsector_percent.Percent":{$gte:70}},
                             
 db.business.find({'grades.grade':"A"},{'grades.$':1}) //return 1st element that match the query 
 db.business.find({'grades.grade':"A",'grades.score':{$gt:10}},{'grades.$':1}) // A or >10
-
+// below pick out all the grades arraies as long as one element satisifed grade=A and score>10
+// then it only return the 1st element which may or may not be grade=1 and socre>10
+db.business.find({$and:[{'grades.grade':"A"},{'grades.score':{$gt:10}}]},{'grades.$':1})
 
 db.business.find({},{'grades':{$elemMatch:{'score':{$gt:10},'grade':"A"}}})
+//return empty if score <=10, b/c all the returned arries has grade A due the first query
 db.business.find({'grades.grade':"A"},{'grades':{$elemMatch:{'score':{$gt:10},'grade':"A"}}})
 
-
+db.business.find({'grades.grade':"A"})
