@@ -6,12 +6,19 @@ db.world_bank_project.find({})
 // Example 1
 db.world_bank_project.find({"id":"P130164"})
 //Using aggregate(), return documents where "id" is "P130164"
+
+db.world_bank_project.aggregate([{$match:{'id':'P130164'}}])
+
 db.world_bank_project.aggregate({$match:{"id":"P130164"}})
 
 // Example 2
 // Return "id" and a non-empty "human_development_project" array
 // which represents "mjtheme_namecode" 
 // containing only documents which name is Human development
+db.world_bank_project.aggregate([{}])
+
+
+
 db.world_bank_project.find({"mjtheme_namecode.name":{$eq:"Human development"}},
                            {"id":true, "mjtheme_namecode":true, "_id":false})
 db.world_bank_project.aggregate(
@@ -31,18 +38,36 @@ db.world_bank_project.aggregate(
 // Example 3
 // For each countrycode, return the number of documents in the collection 
 // in a format of {"_id" : "code", "count" : value}
-db.world_bank_project.find()                               
+db.world_bank_project.find()     
+
+
+db.world_bank_project.aggregate([{$group:{_id:'$countrycode',
+                                'count':{$sum:1}}}
+                                ])
+
+
+                          
 db.world_bank_project.aggregate({$group:{_id :"$countrycode", count:{$sum:1}}})   
      
 // Eample 4
 // Return theme_namecode as an _id and 
 // the number of project has the corresponding theme.
+db.world_bank_project.find({})
+db.world_bank_project.aggregate([{$unwind:'$theme_namecode'}])
+
+
+
+
 db.world_bank_project.aggregate({$unwind : "$theme_namecode"},
                                 {$group : {_id : "$theme_namecode", 
                                            count:{$sum:1}}},
                                )                         
 // Example 5
 // Return the approvalfy in double as approvalfy_num with borrower, and id information. 
+db.world_bank_project.find({})
+db.world_bank_project.aggregate([{$sort:{'approvalfy':-1}},{$project:{'borrower':1,'id':1,'_id':0,''}}])
+
+
 db.world_bank_project.aggregate({$project: 
                                     {"id" : true,
                                     "borrower" : true, 

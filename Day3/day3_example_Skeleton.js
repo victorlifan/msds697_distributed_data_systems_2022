@@ -2,7 +2,7 @@
 //mongoimport --db msds697 --collection world_bank_project --file=world_bank_project.json
 
 use msds697
-
+db.world_bank_project.find({})
 // Example 1
 // Load world_bank_project.json to ”msds697” database’s “world_bank_project” collection and print only “borrower” information.
 db.world_bank_project.find({},{'borrower':1,'_id':0}).pretty()
