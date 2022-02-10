@@ -155,8 +155,8 @@ db.business.find({"name":"White Castle", "address.street":"Pennsylvania Avenue"}
 
 
 // Remove all reviews with Cs for restaurant_id, 40364467 .
-db.business.find({"restaurant_id" : "40364467"}) // Two Cs
-db.business.update({"restaurant_id" : "40364467"},
+db.business.find({"restaurant_id" : "40364467",'grades.grade':"C"}) // Two Cs
+db.business.updateMany({"restaurant_id" : "40364467"},
                    {$pull:{"grades":{"grade":"C"}}})
 db.business.find({"restaurant_id" : "40364467"}) // Zero Cs
 
