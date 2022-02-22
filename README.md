@@ -39,3 +39,29 @@ Create and drop index to improve query performance.
 Load data from S3 and preprocess using Pyspark.
 
 Store created aggregates into MongoDB.
+
+--------
+
+**Day 7 Example**
+
+Creating DataFrames (2 ways)
+
+DataFrame API Basics
+
+--------
+
+**Day 8 Example**
+
+Apply SQL functions with DataFrame - Scalar/Aggregate/Window/UDF/Join
+
+Registering DataFrame in the Table Catalog
+
+Loading/Writing Data using SparkSQL - csv, parquet, json
+
+--------
+
+**Day 9 Example**
+
+Load/Write data to S3/MongoDB locally.
+
+Apply logistic regression to adult.dat using Spark ML.
