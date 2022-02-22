@@ -31,3 +31,11 @@ Design and implement more complex queries  - focusing on query and projection op
 Design and create aggregation pipeline.
 
 Create and drop index to improve query performance.
+
+--------
+
+**Day 6 Example**
+
+Load data from S3 and preprocess using Pyspark.
+
+Store created aggregates into MongoDB.
