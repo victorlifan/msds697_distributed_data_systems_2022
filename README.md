@@ -68,7 +68,7 @@ Apply logistic regression to adult.dat using Spark ML.
 
 --------
 
-**Day 9 Example**
+**Day 10 Example**
 
 Apply decision tree/Random Forest/ and KMeans using penbased.dat
 
