@@ -65,3 +65,11 @@ Loading/Writing Data using SparkSQL - csv, parquet, json
 Load/Write data to S3/MongoDB locally.
 
 Apply logistic regression to adult.dat using Spark ML.
+
+--------
+
+**Day 9 Example**
+
+Apply decision tree/Random Forest/ and KMeans using penbased.dat
+
+Create Spark ML pipeline.
