@@ -73,3 +73,12 @@ Apply logistic regression to adult.dat using Spark ML.
 Apply decision tree/Random Forest/ and KMeans using penbased.dat
 
 Create Spark ML pipeline.
+
+--------
+
+**Day 12 Example**
+
+Create H2O dataframes.
+
+Apply H2O AutoML and evaluate/explain models.
+
